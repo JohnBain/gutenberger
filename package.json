@@ -1,0 +1,21 @@
+{
+  "name": "gutenberger",
+  "version": "1.0.0",
+  "description": "",
+  "main": "parse.js",
+  "dependencies": {
+    "express": "^4.16.2",
+    "fast-pos": "^1.0.1",
+    "lodash": "^4.17.4",
+    "nodemon": "^1.12.4",
+    "striptags": "^3.1.1",
+    "tinyreq": "^3.3.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "nodemon": "nodemon parse.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}

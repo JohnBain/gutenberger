@@ -1,0 +1,54 @@
+<!DOCTYPE HTML>
+<html>
+<head>  
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"   integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="   crossorigin="anonymous"></script>
+<script>
+window.onload = function () {
+	$.get('/get_text', {url: 'https%3A%2F%2Fwww.gutenberg.org%2Ffiles%2F56105%2F56105-h%2F56105-h.htm'}, function(data){
+		//word_count: [...{frequency: Int, text: Str}]
+		//title: Str
+		var newData = data['word_counts'].map(function(e){
+    		e['y'] = e['frequency'];
+    		e['label'] = e['text'];
+    		delete e['frequency'];
+    		delete e['text'];
+    		return e; 
+		});
+
+		var chart = new CanvasJS.Chart("chartContainer", {
+		animationEnabled: true,
+	
+		title:{
+			text: `Most Common Words in ${data['title']}`
+		},
+		axisX:{
+			interval: 1
+		},
+		axisY2:{
+			interlacedColor: "rgba(1,77,101,.2)",
+			gridColor: "rgba(1,77,101,.1)",
+			title: "Mentions"
+		},
+		data: [{
+			type: "bar",
+			name: "words",
+			axisYType: "secondary",
+			color: "#014D65",
+		dataPoints: newData.slice(0, 20)
+	}]
+});
+		console.log(newData);
+		chart.render();
+
+	})
+
+
+
+}
+</script>
+</head>
+<body>
+<div id="chartContainer" style="height: 300px; width: 100%;"></div>
+<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+</body>
+</html>
